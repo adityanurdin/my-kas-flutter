@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "44125128673",
+    "project_id": "my-kas-b8761",
+    "storage_bucket": "my-kas-b8761.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44125128673:android:d1d536dc3863837c53f4a0",
+        "android_client_info": {
+          "package_name": "com.aditya.litecloud.id.aplikasi_kas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44125128673-9veoeglp47spbdsir1runo5ndm6thr9u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHgoR1xtpots1dZtXRUZtt-2efSjEMmUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44125128673-9veoeglp47spbdsir1runo5ndm6thr9u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
