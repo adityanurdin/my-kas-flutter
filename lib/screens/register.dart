@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:aplikasi_kas/screens/home/home.dart';
 import 'package:aplikasi_kas/screens/login.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -86,30 +87,56 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               backgroundColor: MaterialStateProperty.all<Color>(const Color(0xff6F6CD9)),
                             ),
                             onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(builder: (context) => const Home()),
-                              // );
-                              try {
-                                auth.createUserWithEmailAndPassword(email: _email, password: _password);
-                                const CircularProgressIndicator();
-                                Timer(const Duration(seconds: 3), () => Get.offAll(Login()));
-                              } on FirebaseAuthException catch (e) {
+                              auth.createUserWithEmailAndPassword(email: _email, password: _password).then((value) {
+                                Fluttertoast.showToast(
+                                    msg: "Register success, let's login.",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.grey,
+                                    textColor: Colors.black,
+                                    fontSize: 16.0
+                                );
+                                Get.offAll(() => Login());
+                              }).catchError((e) {
                                 if (e.code == 'weak-password') {
                                   print('The password provided is too weak.');
                                   SnackBar(
                                     content: const Text('The password provided is too weak.'),
                                   );
+                                  Fluttertoast.showToast(
+                                      msg: "The password provided is too weak.",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.grey,
+                                      textColor: Colors.black,
+                                      fontSize: 16.0
+                                  );
                                 } else if (e.code == 'email-already-in-use') {
                                   print('The account already exists for that email.');
+                                  Fluttertoast.showToast(
+                                      msg: "The account already exists for that email.",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.grey,
+                                      textColor: Colors.black,
+                                      fontSize: 16.0
+                                  );
                                 }
-                              } catch (e) {
-                                print(e);
-                              }
+                              });
                             },
                             child: Text('Register', style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w700))
                         ),
                       ),
+                      const SizedBox(height: 20),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => Login());
+                        },
+                        child: Text('Login', style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w400)),
+                      )
                     ],
                   ),
                 )
